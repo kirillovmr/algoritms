@@ -61,13 +61,89 @@ class SinglyLinkedList {
     this.length += 1;
     return this;
   }
+
+  get(index) {
+    if (index < 0 || index >= this.length) return null;
+    let i = 0;
+    let element = this.head;
+    while (i !== index) {
+      element = element.next;
+      i++;
+    }
+    return element;
+  }
+
+  set(index, value) {
+    let element = this.get(index);
+    if (!element) return false;
+    element.val = value;
+    return true;
+  }
+
+  insert(index, value) {
+    if (index < 0 || index > this.length) return false;
+    if (index === this.length) return !!this.push(value);
+    if (index === 0) return !!this.unshift(value);
+    let prev = this.get(index - 1);
+    let next = prev.next;
+    const newNode = new Node(value);
+    prev.next = newNode;
+    newNode.next = next;
+    this.length += 1;
+    return true;
+  }
+
+  remove(index) {
+    if (index < 0 || index >= this.length) return false;
+    if (index === 0) return this.shift(index);
+    if (index === this.length - 1) return this.pop(index);
+    const prev = this.get(index - 1);
+    const removed = prev.next;
+    prev.next = removed.next;
+    this.length -= 1;
+    return removed;
+  }
+
+  reverse() {
+    if (this.length === 0) return null;
+    if (this.length === 1) return this;
+
+    let node = this.head;
+    [this.head, this.tail] = [this.tail, this.head];
+
+    let prev = null,
+        next;
+    
+    for (let i = 0; i < this.length; i++) {
+      next = node.next;
+      node.next = prev;
+      prev = node;
+      node = next;
+    }
+
+    return this;
+  }
+
+  print() {
+    const arr = [];
+    let cur = this.head;
+    while(cur) {
+      arr.push(cur.val);
+      cur = cur.next;
+    }
+    console.log(arr);
+  }
 }
 
 const list = new SinglyLinkedList();
+list.push(1);
+list.push(2);
 list.push(3);
 list.push(4);
-// list.push(2);
 
-console.log('Before', list);
-console.log(list.unshift(1));
-console.log('After', list);
+list.print();
+// console.log('\n', list.remove(1, 'Hey'));
+// console.log('\n', list.get(1, 'Hey'));
+list.reverse();
+
+list.print();
