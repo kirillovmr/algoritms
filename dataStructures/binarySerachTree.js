@@ -29,10 +29,30 @@ class BinarySearchTree {
         else
           return currentNode.left = newNode;
       }
-      // If value already exists in tree
-      else {
+      else
         return false;
+    }
+  }
+
+  search(value) {
+    if(!this.root) return false;
+
+    let currentNode = this.root;
+    while(true) {
+      if (value > currentNode.value) {
+        if (currentNode.right)
+          currentNode = currentNode.right;
+        else
+          return false;
       }
+      else if (value < currentNode.value) {
+        if (currentNode.left)
+          currentNode = currentNode.left;
+        else
+          return false;
+      }
+      else
+        return currentNode;
     }
   }
 }
@@ -43,7 +63,5 @@ tree.insert(10);
 tree.insert(11);
 tree.insert(9);
 tree.insert(8);
-tree.insert(11);
-tree.insert(14);
 
 console.log(JSON.stringify(tree, null, 2));
