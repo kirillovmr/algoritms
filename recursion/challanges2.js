@@ -8,7 +8,7 @@ function reverse(str, res=[]) {
   return res.join('');
 }
 
-// console.log('[reverse]:', reverse('awesome'));
+console.log('[reverse]:', reverse('awesome'));
 // console.log('[reverse]:', reverse('rithmschool'));
 
 
@@ -52,7 +52,7 @@ function flatten(arr, res=[]){
   return res;
 }
 
-console.log('[flatten]:', flatten([1, 2, 3, [4, 5] ]));
-console.log('[flatten]:', flatten([1, [2, [3, 4], [[5]]]]));
-console.log('[flatten]:', flatten([[1],[2],[3]]));
-console.log('[flatten]:', flatten([[[[1], [[[2]]], [[[[[[[3]]]]]]]]]]));
+// console.log('[flatten]:', flatten([1, 2, 3, [4, 5] ]));
+// console.log('[flatten]:', flatten([1, [2, [3, 4], [[5]]]]));
+// console.log('[flatten]:', flatten([[1],[2],[3]]));
+// console.log('[flatten]:', flatten([[[[1], [[[2]]], [[[[[[[3]]]]]]]]]]));
