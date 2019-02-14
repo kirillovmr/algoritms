@@ -26,7 +26,6 @@ class Graph {
   }
 
   removeVertex(vertex) {
-    console.log(this.adjacencyList[vertex]);
     if (this.adjacencyList[vertex]) {
       [...this.adjacencyList[vertex]].forEach(v2 => {
         this.removeEdge(vertex, v2);
@@ -34,19 +33,50 @@ class Graph {
       delete this.adjacencyList[vertex];
     }
   }
+
+  depthFirstTraversal(vertex) {
+    if (!this.adjacencyList[vertex]) return null;
+    const queue   = [vertex],
+          visited = [];
+
+    while(queue.length) {
+      const v = queue.pop();
+      console.log('Visiting', v);
+      visited.push(v);
+      this.adjacencyList[v].forEach(sibling => {
+        if (visited.indexOf(sibling) === -1 && queue.indexOf(sibling) === -1) {
+          queue.push(sibling);
+        }
+      });
+    }
+  }
 }
 
 const g = new Graph;
 
-g.addVertex('Chicago');
-g.addVertex('Tokyo');
-g.addVertex('Boston');
+g.addVertex('A');
+g.addVertex('C');
+g.addVertex('E');
+g.addVertex('J');
+g.addVertex('M');
+g.addVertex('D');
+g.addVertex('F');
+g.addVertex('K');
 
-g.addEdge('Chicago', 'Tokyo');
-g.addEdge('Chicago', 'Boston');
+g.addEdge('A', 'C');
+g.addEdge('C', 'E');
+g.addEdge('E', 'D');
+g.addEdge('D', 'F');
+g.addEdge('F', 'K');
+g.addEdge('K', 'M');
+g.addEdge('M', 'A');
+g.addEdge('E', 'J');
+g.addEdge('J', 'A');
 
 console.log(g.adjacencyList);
 
-g.removeVertex('Tokyo');
+g.depthFirstTraversal('A');
 
-console.log(g.adjacencyList);
+// g.removeVertex('Tokyo');
+
+// console.log(g.adjacencyList);
