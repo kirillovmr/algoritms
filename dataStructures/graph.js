@@ -50,6 +50,23 @@ class Graph {
       });
     }
   }
+
+  breadthFirstTraverse(vertex) {
+    if (!this.adjacencyList[vertex]) return null;
+    const queue   = [vertex],
+          visited = [];
+
+    while(queue.length) {
+      const v = queue.shift();
+      console.log('Visiting', v);
+      visited.push(v);
+      this.adjacencyList[v].forEach(sibling => {
+        if (visited.indexOf(sibling) === -1 && queue.indexOf(sibling) === -1) {
+          queue.push(sibling);
+        }
+      });
+    }
+  }
 }
 
 const g = new Graph;
@@ -75,7 +92,7 @@ g.addEdge('J', 'A');
 
 console.log(g.adjacencyList);
 
-g.depthFirstTraversal('A');
+g.breadthFirstTraverse('J');
 
 // g.removeVertex('Tokyo');
 
